@@ -158,3 +158,80 @@ Dans ce cours, nous avons vu comment initialiser une application React Native av
 
 
 ##############################################################################################################################################``
+
+
+
+
+
+
+########################################################################
+.gitingore :
+  Oui, tu peux tout à fait ajouter certains fichiers ou dossiers à ignorer dans ton projet Git en utilisant le fichier .gitignore. Voici comment procéder pour que certains fichiers dans le dossier docs/ ne soient pas inclus lors du push sur GitHub :
+
+Étape 1 : Modifier le fichier .gitignore
+Ouvre ton fichier .gitignore à la racine de ton projet (si tu n'en as pas encore, crée-le à la racine du projet).
+
+Ajoute les fichiers ou dossiers que tu souhaites ignorer dans ce fichier. Par exemple, pour ignorer certains fichiers spécifiques dans le dossier docs/, tu peux ajouter les lignes suivantes :
+
+bash
+Copier
+Modifier
+# Ignorer tout le contenu du dossier docs/
+docs/*
+
+# Mais garder certains fichiers spécifiques dans docs (ex : exercices)
+!docs/exercices/
+
+# Ou si tu veux ignorer certains fichiers seulement :
+docs/secret_file.md
+docs/private_ideas.md
+Explication :
+docs/* : Cette ligne ignore tout le contenu du dossier docs/.
+
+!docs/exercices/ : Cette ligne inverse l'ignorance pour un sous-dossier spécifique, ici exercices/, afin que les fichiers dans ce sous-dossier ne soient pas ignorés.
+
+docs/secret_file.md et docs/private_ideas.md : Ces fichiers seront ignorés spécifiquement.
+
+Étape 2 : Vérification du fichier .gitignore
+Une fois que tu as mis à jour le fichier .gitignore, voici quelques commandes utiles pour t'assurer que tout est bien pris en compte.
+
+Vérifie si les fichiers sont correctement ignorés :
+
+Si les fichiers sont déjà suivis par Git avant de les avoir ajoutés dans .gitignore, tu dois d'abord les retirer du suivi. Sinon, même après les avoir ajoutés dans .gitignore, Git continuera à les suivre.
+
+Pour retirer un fichier ou un dossier du suivi de Git, utilise cette commande :
+
+git rm --cached chemin/du/fichier
+Exemple :
+
+git rm --cached docs/secret_file.md
+Cette commande supprime le fichier du suivi Git sans le supprimer de ton disque local.
+
+Vérifie les fichiers ignorés :
+
+Après avoir ajouté tes modifications dans .gitignore, tu peux vérifier si les fichiers sont bien ignorés avec :
+
+git status
+Les fichiers ou dossiers ignorés devraient apparaître dans la liste sous "ignored files".
+
+Étape 3 : Effectuer un commit et push
+Ajoute et commit les modifications :
+
+git add .gitignore
+git commit -m "Ajout de fichiers à ignorer dans .gitignore"
+Pousse les modifications vers ton repo GitHub :
+
+
+git push origin main
+Assure-toi de ne pas avoir ajouté les fichiers que tu veux ignorer avant d'exécuter le git push. Si ces fichiers sont déjà suivis par Git et que tu ne les as pas retirés du suivi, ils seront toujours poussés.
+
+Résumé :
+Modifie ton fichier .gitignore pour ignorer les fichiers sensibles ou privés dans le dossier docs/.
+
+Utilise git rm --cached pour arrêter de suivre ces fichiers.
+
+Vérifie avec git status si les fichiers sont bien ignorés.
+
+Commit et push normalement.
+
+Si tout est bien configuré, tes fichiers ignorés ne seront pas envoyés sur GitHub lors du push. N'hésite pas à me demander si tu rencontres un problème ! 😊
