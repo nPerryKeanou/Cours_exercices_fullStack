@@ -1,1 +1,5 @@
+##ignore tout les fichiers dans le dossier docs/
 docs/*
+
+## n'iginore pas ce fichier là
+!docs/06_exercices_front.md
