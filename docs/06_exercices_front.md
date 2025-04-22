@@ -1,131 +1,160 @@
-# 🔪 Exercices Frontend - React Native (avec TypeScript)
+🧪 Exercices Frontend avec React Native (Expo Router)
 
-> 🔁 Exercices liés au Cours 01 (composants de base + navigation)
+⚙️ Objectif général
 
----
+Créer une série d'exercices pratiques pour s'entraîner avec React Native et expo-router, en suivant une progression logique. Chaque exercice est accompagné d'explications pédagogiques, de liens vers la documentation officielle et de bonnes pratiques.
 
-## 📋 Objectif
+🧪 Exercice 1 – Affichage simple d’un composant
 
-Mettre en pratique ce que tu viens d’apprendre :  
-✅ créer des écrans,  
-✅ manipuler des composants de base,  
-✅ ajouter de la navigation.
+🎯 Objectif
 
----
+Apprendre à créer un composant React Native et l’afficher dans l’application.
 
-## 🧹 Exercice 01 – Créer un écran d’accueil personnalisé
+📚 Technologies utilisées
 
-### 🌟 Objectif
-Créer un écran `AccueilScreen` contenant :
-- Un titre (avec `Text`)
-- Une brève description de l'app
-- Un bouton pour accéder à un autre écran
+View
 
-### 📁 Étapes
+Text
 
-1. Crée un fichier `AccueilScreen.tsx` dans `screens/`
-2. Utilise les composants `View`, `Text` et `Button`
-3. Ajoute une navigation vers un autre écran (ex: `InfosScreen`)
+StyleSheet
 
-### 💡 Aide (structure)
+expo-router
 
-```tsx
-import { View, Text, Button } from 'react-native';
+🧠 Pourquoi ?
 
-export default function AccueilScreen({ navigation }) {
+Tout est basé sur des composants en React Native. Il est fondamental de savoir en créer et les afficher correctement.
+
+✅ Ce qu’il faut faire
+
+Créer une page exercice01.tsx dans le dossier app/exercices/
+
+Afficher un message centré à l'écran : "Bienvenue dans mon premier exercice React Native 🎉"
+
+Ajouter un fond blanc (backgroundColor: '#fff') pour éviter l'écran noir
+
+💡 Exemple :
+
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function Exercice1Screen() {
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 24 }}>Bienvenue sur l'app Juments</Text>
-      <Text>Gérez vos juments facilement et efficacement.</Text>
-      <Button title="Voir les infos" onPress={() => navigation.navigate('Infos')} />
+    <View style={styles.container}>
+      <Text style={styles.title}>Bienvenue dans mon premier exercice React Native 🎉</Text>
     </View>
   );
 }
-```
 
----
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+});
 
-## 🧹 Exercice 02 – Créer un écran `InfosScreen`
+🧪 Exercice 2 – Navigation entre deux écrans
 
-### 🌟 Objectif
-Afficher des infos statiques sur ton app (texte uniquement)
+🎯 Objectif
 
-### 📁 Étapes
+Naviguer d’un écran à un autre grâce à expo-router
 
-1. Crée `InfosScreen.tsx` dans `screens/`
-2. Ajoute des `Text` avec différentes tailles
-3. Tu peux aussi essayer `ScrollView` si tu veux tester un écran long
+📚 Technologies utilisées
 
-### 💡 Aide (structure)
+useRouter
 
-```tsx
-import { View, Text, ScrollView } from 'react-native';
+✅ Ce qu’il faut faire
 
-export default function InfosScreen() {
+Modifier la page index.tsx dans le dossier app/
+
+Ajouter un bouton pour naviguer vers /exercices/exercice01
+
+💡 Exemple :
+
+import { View, Text, Button } from 'react-native';
+import { useRouter } from 'expo-router';
+
+export default function HomeScreen() {
+  const router = useRouter();
+
   return (
-    <ScrollView contentContainerStyle={{ padding: 20 }}>
-      <Text style={{ fontSize: 22 }}>Infos sur l'application</Text>
-      <Text style={{ marginTop: 10 }}>
-        Cette application permet de gérer vos juments : suivis, catégories, profils, etc.
-      </Text>
-      <Text style={{ marginTop: 10 }}>
-        Version : 1.0.0
-      </Text>
-    </ScrollView>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+      <Text>Bienvenue dans les exercices !</Text>
+      <Button title="Aller à l'exercice 1" onPress={() => router.push('/exercices/exercice01')} />
+    </View>
   );
 }
-```
 
----
+🧪 Exercice 3 – Création d’un composant personnalisé
 
-## 🧹 Exercice 03 – Navigation entre les deux écrans
+🎯 Objectif
 
-### 🌟 Objectif
-Relier les deux écrans via la navigation (Stack Navigator)
+Créer un composant réutilisable avec des props
 
-### 📁 Étapes
+📚 Technologies utilisées
 
-1. Dans `App.tsx`, importe tes deux écrans :
-   ```tsx
-   import AccueilScreen from './screens/AccueilScreen';
-   import InfosScreen from './screens/InfosScreen';
-   ```
+Props
 
-2. Configure le Stack Navigator :
+View, Text
 
-   ```tsx
-   <Stack.Navigator initialRouteName="Accueil">
-     <Stack.Screen name="Accueil" component={AccueilScreen} />
-     <Stack.Screen name="Infos" component={InfosScreen} />
-   </Stack.Navigator>
-   ```
+✅ Ce qu’il faut faire
 
-3. Vérifie que le bouton fonctionne bien pour naviguer.
+Créer un composant MonMessage.tsx dans components/
 
----
+Le composant prend une prop message: string et l’affiche
 
-## ✅ Résultat attendu
+Réutiliser ce composant dans exercice01.tsx
 
-Une app fonctionnelle avec :
+💡 Exemple du composant :
 
-| Écran        | Contenu attendu                      |
-|--------------|--------------------------------------|
-| Accueil      | Texte + bouton vers Infos            |
-| Infos        | Texte d’information                  |
-| Navigation   | Aller-retour entre Accueil <-> Infos |
+// components/MonMessage.tsx
+import { View, Text, StyleSheet } from 'react-native';
 
----
+export default function MonMessage({ message }: { message: string }) {
+  return (
+    <View>
+      <Text style={styles.text}>{message}</Text>
+    </View>
+  );
+}
 
-## 🧠 Conseil bonus
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 16,
+    color: 'blue',
+    textAlign: 'center',
+    margin: 10,
+  },
+});
 
-- Tu peux styliser chaque écran avec `StyleSheet.create()`  
-- Essaie d’ajouter une couleur ou une image (dans `assets/`)
+💡 Exemple d’utilisation :
 
----
+// app/exercices/exercice01.tsx
+import { View, StyleSheet } from 'react-native';
+import MonMessage from '../../components/MonMessage';
 
-## 🖜️ Prochaine étape
+export default function Exercice1Screen() {
+  return (
+    <View style={styles.container}>
+      <MonMessage message="Voici un message affiché avec un composant personnalisé 🧩" />
+    </View>
+  );
+}
 
-> On va créer un vrai **système d’accueil avec un menu**, puis simuler un profil jument avec des données statiques (mock).
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
----
+✅ Tu peux tester tout ça depuis ton projet dans Cours_exercices_fullStack !
 
+👉 On continue avec les prochains exercices (navigation avec paramètres, liste, formulaire, etc.) dès que tu es prêt.
