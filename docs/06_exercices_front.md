@@ -158,3 +158,94 @@ const styles = StyleSheet.create({
 ✅ Tu peux tester tout ça depuis ton projet dans Cours_exercices_fullStack !
 
 👉 On continue avec les prochains exercices (navigation avec paramètres, liste, formulaire, etc.) dès que tu es prêt.
+
+
+
+
+
+
+
+##########################################################################
+
+
+
+### 🧪 Exercice 4 – Navigation dynamique avec paramètres
+
+#### 🎯 Objectif
+
+Apprendre à :
+- Créer une route dynamique avec `[id].tsx`
+- Lire et afficher le paramètre passé dans l’URL
+- Naviguer vers cette page dynamiquement
+
+#### 📚 Technologies utilisées
+
+- [`useLocalSearchParams`](https://expo.github.io/router/docs/api/useLocalSearchParams)
+- [`useRouter`](https://expo.github.io/router/docs/api/useRouter)
+- [`[param].tsx`](https://expo.github.io/router/docs/routing/dynamic-routes)
+
+---
+
+#### ✅ Étapes à suivre
+
+##### 1. Créer le fichier `app/exercices/[id].tsx`
+
+```tsx
+import { View, Text, StyleSheet } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
+
+export default function ExerciceDetailScreen() {
+  const { id } = useLocalSearchParams();
+
+  const renderContent = () => {
+    switch (id) {
+      case '1':
+        return <Text style={styles.text}>🎯 Exercice 1 : Affichage simple</Text>;
+      case '2':
+        return <Text style={styles.text}>📱 Exercice 2 : Navigation entre écrans</Text>;
+      case '3':
+        return <Text style={styles.text}>🧩 Exercice 3 : Composant personnalisé</Text>;
+      default:
+        return <Text style={styles.text}>❓ Exercice inconnu : {id}</Text>;
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      {renderContent()}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 18,
+    textAlign: 'center',
+  },
+});
+2. Modifier index.tsx pour y ajouter des boutons de navigation
+
+import { View, Text, Button } from 'react-native';
+import { useRouter } from 'expo-router';
+
+export default function HomeScreen() {
+  const router = useRouter();
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+      <Text style={{ marginBottom: 16 }}>Bienvenue dans les exercices !</Text>
+      <Button title="Exercice 1" onPress={() => router.push('/exercices/1')} />
+      <Button title="Exercice 2" onPress={() => router.push('/exercices/2')} />
+      <Button title="Exercice 3" onPress={() => router.push('/exercices/3')} />
+    </View>
+  );
+}
+✅ Résultat
+Tu peux désormais accéder dynamiquement à chaque exercice via l’URL /exercices/1, /exercices/2, etc.
+Le contenu affiché s’adapte selon la valeur de l’id.
