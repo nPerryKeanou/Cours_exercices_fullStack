@@ -249,3 +249,107 @@ export default function HomeScreen() {
 ✅ Résultat
 Tu peux désormais accéder dynamiquement à chaque exercice via l’URL /exercices/1, /exercices/2, etc.
 Le contenu affiché s’adapte selon la valeur de l’id.
+
+#########################################################################################£
+
+## 🧪 Exercice 5 – Affichage d’une liste de données avec FlatList
+
+---
+
+### 🎯 Objectif
+
+Afficher dynamiquement une liste d’objets dans l’interface, en utilisant `FlatList`, composant optimisé pour les longues listes.
+
+---
+
+### 📚 Technologies utilisées
+
+- [`FlatList`](https://reactnative.dev/docs/flatlist)
+- [`View`](https://reactnative.dev/docs/view)
+- [`Text`](https://reactnative.dev/docs/text)
+- [`StyleSheet`](https://reactnative.dev/docs/stylesheet)
+
+---
+
+### 💡 Pourquoi ?
+
+Dans presque toutes les apps, on affiche des listes : utilisateurs, posts, produits, animaux, etc. `FlatList` est la solution performante de React Native pour cela.
+
+---
+
+### ✅ Ce qu’il faut faire
+
+1. Créer une page `exercice05.tsx` dans `app/exercices/`
+2. Afficher une liste de **juments** fictives
+3. Chaque jument doit avoir un nom, un âge et une couleur
+4. Styliser les cartes pour une meilleure lisibilité
+
+---
+
+### 🐴 Exemple de données à afficher
+
+```ts
+const juments = [
+  { id: '1', nom: 'Étoile', age: 5, couleur: 'Marron' },
+  { id: '2', nom: 'Luna', age: 7, couleur: 'Noire' },
+  { id: '3', nom: 'Perle', age: 4, couleur: 'Grise' },
+];
+
+
+💻 Exemple complet du composant
+
+import { View, Text, FlatList, StyleSheet } from 'react-native';
+
+const juments = [
+  { id: '1', nom: 'Étoile', age: 5, couleur: 'Marron' },
+  { id: '2', nom: 'Luna', age: 7, couleur: 'Noire' },
+  { id: '3', nom: 'Perle', age: 4, couleur: 'Grise' },
+];
+
+export default function Exercice5Screen() {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={juments}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.item}>
+            <Text style={styles.name}>Nom : {item.nom}</Text>
+            <Text>Âge : {item.age} ans</Text>
+            <Text>Couleur : {item.couleur}</Text>
+          </View>
+        )}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#fff',
+  },
+  item: {
+    marginBottom: 16,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+  },
+  name: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
+
+
+🔁 Possibilités d’évolution
+Ajouter une image de la jument
+
+Rendre chaque élément cliquable (pour ouvrir une fiche)
+
+Charger les données depuis une API
+
+Utiliser une ScrollView si la liste est courte (mais FlatList est mieux optimisé)
+
